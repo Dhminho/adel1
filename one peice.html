@@ -100,11 +100,8 @@
 
     .card-header{ margin-bottom: 30px; display:flex; flex-direction:column; align-items:center; }
     
-    /* ======================================= */
-    /* === ✅ تعديل 1: تكبير حجم الشعار === */
-    /* ======================================= */
     .logo img{ 
-      width:300px; /* تم تكبير الحجم من 180px */
+      width:300px; 
       filter:drop-shadow(0 6px 20px rgba(0,0,0,0.6)); 
       animation:float-up-down 4s ease-in-out infinite; 
     }
@@ -150,8 +147,24 @@
       text-align: center;
       position: relative;
       z-index: 2;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
     }
     .input::placeholder{ color:rgba(255,255,255,0.35) }
+
+    select.input {
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239aa7bd%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: left 1.2em top 50%, 0 0;
+        background-size: .65em auto, 100%;
+        padding-right: 2.5em; 
+    }
+    select.input option {
+        color: black;
+        background: white;
+    }
+
 
     .neon-stroke {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -174,12 +187,14 @@
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative; overflow: hidden;
       border-radius: var(--radius);
+      text-decoration: none;
     }
 
     .btn {
       width:100%; padding:18px; border:none; cursor:pointer;
       font-weight:700; font-size:16px; background: var(--accent2);
       color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6);
+      margin-top: 20px;
       margin-bottom:20px;
     }
     .btn:hover {
@@ -224,15 +239,86 @@
 
     .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; fill: currentColor; }
     
+    /* ======================================= */
+    /* === ✅ إضافة: ستايل مفتاح التحكم (Switch) === */
+    /* ======================================= */
+    .switch-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: var(--glass);
+        padding: 12px 18px;
+        border-radius: var(--radius);
+        border: 1px solid var(--glass-border);
+        margin-bottom: 10px;
+    }
+    .switch-container p {
+        margin: 0;
+        color: var(--muted);
+        font-weight: 600;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #334050;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    input:checked + .slider {
+      background: var(--accent2);
+    }
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    .slider.round {
+      border-radius: 34px;
+    }
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+
     @media screen and (max-width: 480px) {
       .login-card {
         padding: 20px;
       }
       .logo img {
-        width: 170px; /* تم تكبير الحجم من 140px */
+        width: 170px;
       }
       .title h1 {
-        font-size: 28px; /* تم تكبير الحجم من 24px */
+        font-size: 28px;
       }
       .actions {
         flex-direction: column;
@@ -271,8 +357,31 @@
           <svg class="neon-stroke" viewBox="0 0 300 50" preserveAspectRatio="none">
             <rect x="1" y="1" width="99%" height="48" />
           </svg>
-          <input id="cardInput" class="input" type="text" placeholder="أدخل رقم الكرت هنا">
+          <input id="cardInput" class="input" type="text" inputmode="numeric" placeholder="أدخل رقم الكرت هنا">
         </div>
+        
+        <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة المناسبة لك</p>
+
+        <div class="input-wrapper">
+            <select id="speedSelect" class="input">
+              <option value="1">سرعه واحد ميجا</option>
+              <option value="2">سرعه 2 ميجا</option>
+              <option value="4">سرعه 4 ميجا</option>
+              <option value="high">سرعه عاليه جدا</option>
+            </select>
+        </div>
+
+        <!-- ======================================= -->
+        <!-- === ✅ إضافة: خيار إيقاف التحديثات === -->
+        <!-- ======================================= -->
+        <div class="switch-container">
+            <p>ايقاف التحديثات</p>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+        </div>
+
 
         <button id="loginBtn" class="btn">تسجيل الدخول</button>
         <div class="actions">
@@ -285,17 +394,22 @@
             نقاط البيع
           </button>
         </div>
-        <button id="copySupport" class="support-btn">خدمة العملاء: 772950532</button>
+
+        <a href="https://www.tvquran.com/" target="_blank" rel="noopener noreferrer" class="ghost" style="width:100%; margin-bottom: 20px; background-color: rgba(111, 222, 175, 0.1); border-color: rgba(111, 222, 175, 0.4);">
+            انقر هنا لفتح موقع القرآن الكريم مجانًا
+        </a>
+
+        <button id="copySupport" class="support-btn" data-number="772950532">خدمة العملاء: 772950532</button>
       </div>
 
       <div id="prices-view" class="view-container">
-        <h2>قائمة الأسعار — أنواع الكروت</h2>
+        <h2>قائمة الأسعار — حجم الباقات</h2>
         <div class="list" id="pricesList"></div>
         <button class="ghost back-btn" style="width:100%">العودة</button>
       </div>
 
       <div id="stores-view" class="view-container">
-        <h2>نقاط البيع — الفروع المعتمدة</h2>
+        <h2>نقاط البيع</h2>
         <div class="list" id="storesList"></div>
         <button class="ghost back-btn" style="width:100%">العودة</button>
       </div>
@@ -306,16 +420,18 @@
 
   <script>
     const prices = [
-      {type:"كرت برونزي", size:"5GB", value:"1000 ريال"},
-      {type:"كرت فضي", size:"15GB", value:"2500 ريال"},
-      {type:"كرت ذهبي", size:"30GB", value:"4500 ريال"},
-      {type:"كرت ماسي (VIP)", size:"70GB", value:"8000 ريال"},
+      {value:"ابو 100 ريال", size:"400 ميجا"},
+      {value:"ابو 200 ريال", size:"800 ميجا"},
+      {value:"ابو 300 ريال", size:"1024 ميجا"},
+      {value:"ابو 500 ريال", size:"2 جيجا"},
+      {value:"ابو 1000 ريال", size:"4 جيجا"},
+      {value:"ابو 1500 ريال", size:"6 جيجا"},
+      {value:"ابو 3000 ريال", size:"12 جيجا"},
+      {value:"ابو 3500 ريال", size:"14 جيجا"}
     ];
+
     const stores = [
-      {branch:"المركز الرئيسي - شارع هايل", hours:"9ص - 10م"},
-      {branch:"فرع الحصبة - جوار الجامعة", hours:"10ص - 10م"},
-      {branch:"فرع حدة - المدينة مول", hours:"11ص - 11م"},
-      {branch:"فرع السبعين - أمام مستشفى 48", hours:"9ص - 9م"},
+      {branch:"البقالات المجاوره للشبكه", hours:"خدمة على مدار الساعة"},
     ];
 
     const pricesBtn = document.getElementById('pricesBtn');
@@ -346,11 +462,8 @@
     function populateLists(){
       pricesList.innerHTML = prices.map(p=>`
         <div class="item">
-          <div>
-            <div style="font-weight:700">${p.type}</div>
-            <div class="chip">${p.size}</div>
-          </div>
-          <div style="font-weight:600">${p.value}</div>
+          <div style="font-weight:700">${p.value}</div>
+          <div style="font-weight:600; color: var(--neon);">${p.size}</div>
         </div>
       `).join('');
 
@@ -372,8 +485,26 @@
     });
 
     copySupport.addEventListener('click', ()=>{
-      navigator.clipboard.writeText(copySupport.innerText)
+      const numberToCopy = copySupport.dataset.number;
+      navigator.clipboard.writeText(numberToCopy)
         .then(()=>showToast("تم نسخ رقم خدمة العملاء"))
+    });
+
+    const arabicToEnglishNumerals = (str) => {
+        const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+        let newStr = String(str);
+        for (let i = 0; i < arabicNumerals.length; i++) {
+            const regex = new RegExp(arabicNumerals[i], 'g');
+            newStr = newStr.replace(regex, i);
+        }
+        return newStr;
+    };
+
+    cardInput.addEventListener('input', (event) => {
+        let value = event.target.value;
+        value = arabicToEnglishNumerals(value);
+        value = value.replace(/[^0-9]/g, '');
+        event.target.value = value;
     });
 
     function showToast(msg){
