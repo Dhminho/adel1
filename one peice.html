@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>شبكة ون بيس — تسجيل الدخول</title>
+
+  <!-- الخطوط -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1720;
+      --glass: rgba(255,255,255,0.04);
+      --accent1: linear-gradient(135deg,#ffb86b 0%, #ff6bcb 50%, #6be0ff 100%);
+      --accent2: linear-gradient(90deg,#7b61ff, #ff4da6);
+      --text:#e6eef8;
+      --muted:#9aa7bd;
+      --glass-border: rgba(255,255,255,0.06);
+      --neon: #6be0ff;
+      --radius: 16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    html,body{
+      width: 100%;
+      height: 100%;
+      font-family:"Cairo","Poppins",system-ui;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+      background-color: var(--bg);
+    }
+
+    /* خلفية فضائية */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      z-index: -2;
+    }
+    body::before {
+      background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      animation: moveStars 300s linear infinite;
+      opacity:0.5;
+    }
+    body::after {
+      background: url('https://www.transparenttextures.com/patterns/tiny-cross-hatch.png') repeat;
+      animation: moveStars 500s linear infinite reverse;
+      opacity:0.3;
+      z-index:-1;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+    
+    .login-card {
+      width: 100%;
+      height: 100%;
+      background: var(--card);
+      padding: 30px;
+      position: relative;
+      text-align: center;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card::before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: url('https://i.ibb.co/Tx3B826F/066ab10d4e11.png') no-repeat center center;
+      background-size: cover;
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .content-wrapper {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .view-container { display:none; width: 100%; }
+    .view-container.view-active { display:block; animation:view-fade-in .3s ease-out forwards; }
+    .view-is-leaving { animation:view-fade-out .2s ease-in forwards; }
+    @keyframes view-fade-in { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes view-fade-out { from{opacity:1;transform:translateY(0);} to{opacity:0;transform:translateY(-10px);} }
+
+    .card-header{ margin-bottom: 30px; display:flex; flex-direction:column; align-items:center; }
+    
+    /* ======================================= */
+    /* === ✅ تعديل 1: تكبير حجم الشعار === */
+    /* ======================================= */
+    .logo img{ 
+      width:300px; /* تم تكبير الحجم من 180px */
+      filter:drop-shadow(0 6px 20px rgba(0,0,0,0.6)); 
+      animation:float-up-down 4s ease-in-out infinite; 
+    }
+    @keyframes float-up-down { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .title h1 {
+      margin: 0;
+      font-size: 36px; 
+      font-weight: 800;
+      white-space: nowrap;       overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .input {
+      width: 100%;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 18px;
+      border-radius: var(--radius);
+      color: var(--text);
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .input::placeholder{ color:rgba(255,255,255,0.35) }
+
+    .neon-stroke {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+    .neon-stroke rect {
+      fill: none; stroke: url(#neonGradient); stroke-width: 2;
+      stroke-dasharray: 720, 1000; stroke-dashoffset: 720;
+      rx: var(--radius); ry: var(--radius);
+      animation: traceStroke 8s ease-in-out infinite;
+    }
+    @keyframes traceStroke {
+      0% { stroke-dashoffset: 720; opacity: 0; }
+      10% { opacity: 1; }
+      90% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+
+    .btn, .ghost, .support-btn, .back-btn {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative; overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .btn {
+      width:100%; padding:18px; border:none; cursor:pointer;
+      font-weight:700; font-size:16px; background: var(--accent2);
+      color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6);
+      margin-bottom:20px;
+    }
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(123,97,255,0.4), 0 6px 16px rgba(0,0,0,0.6);
+      background: var(--accent1);
+    }
+    
+    .ghost, .back-btn {
+      flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text); padding: 15px; cursor: pointer; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .ghost:hover, .back-btn:hover {
+      background: var(--glass); border-color: var(--neon); color: var(--neon);
+      transform: translateY(-3px); box-shadow: 0 0 25px rgba(107, 224, 255, 0.5);
+    }
+
+    .support-btn {
+      width:100%; background: var(--glass); border: 1px solid var(--glass-border);
+      color: var(--muted); padding: 15px; cursor: pointer; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .support-btn:hover {
+      color: var(--text); border-color: rgba(255,255,255,0.15);
+      transform: translateY(-3px); box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .actions { display: flex; gap: 12px; margin-bottom: 20px; }
+
+    .list{ display:grid; gap:12px; margin:20px 0; max-height:35vh; overflow-y:auto; padding:6px; }
+    .list .item{
+      background:rgba(255,255,255,0.03); padding:14px; border-radius: var(--radius);
+      display:flex; justify-content:space-between; align-items:center;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .chip{ font-size:13px; color:var(--muted) }
+
+    .toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:28px; background:rgba(12,18,26,0.9); color:var(--text); padding:14px 20px; border-radius:14px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 30px rgba(0,0,0,0.6); display:none; z-index:200; }
+    .toast.show{ display:block; animation:toastIn .24s ease; }
+    @keyframes toastIn{ from{opacity:0;transform:translate(-50%,10px)} to{opacity:1;transform:translate(-50%,0)} }
+
+    .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; fill: currentColor; }
+    
+    @media screen and (max-width: 480px) {
+      .login-card {
+        padding: 20px;
+      }
+      .logo img {
+        width: 170px; /* تم تكبير الحجم من 140px */
+      }
+      .title h1 {
+        font-size: 28px; /* تم تكبير الحجم من 24px */
+      }
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff6bcb" />
+        <stop offset="50%" stop-color="#6be0ff" />
+        <stop offset="100%" stop-color="#ffb86b" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <main class="login-card" role="main">
+    
+    <div class="content-wrapper">
+      <div id="login-view" class="view-container view-active">
+        <header class="card-header">
+          <div class="logo">
+            <img src="https://static.wikia.nocookie.net/logopedia/images/e/e7/One_Piece_logo.svg" alt="شعار شبكة ون بيس">
+          </div>
+          <div class="title">
+            <h1>شبكة ون بيس اللاسلكية</h1>
+            <p>مرحبًا بكم شبكة ون بيس نت</p>
+          </div>
+        </header>
+        <h2>تسجيل الدخول للشبكة</h2>
+
+        <div class="input-wrapper">
+          <svg class="neon-stroke" viewBox="0 0 300 50" preserveAspectRatio="none">
+            <rect x="1" y="1" width="99%" height="48" />
+          </svg>
+          <input id="cardInput" class="input" type="text" placeholder="أدخل رقم الكرت هنا">
+        </div>
+
+        <button id="loginBtn" class="btn">تسجيل الدخول</button>
+        <div class="actions">
+          <button id="pricesBtn" class="ghost">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            الأسعار
+          </button>
+          <button id="storesBtn" class="ghost">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            نقاط البيع
+          </button>
+        </div>
+        <button id="copySupport" class="support-btn">خدمة العملاء: 772950532</button>
+      </div>
+
+      <div id="prices-view" class="view-container">
+        <h2>قائمة الأسعار — أنواع الكروت</h2>
+        <div class="list" id="pricesList"></div>
+        <button class="ghost back-btn" style="width:100%">العودة</button>
+      </div>
+
+      <div id="stores-view" class="view-container">
+        <h2>نقاط البيع — الفروع المعتمدة</h2>
+        <div class="list" id="storesList"></div>
+        <button class="ghost back-btn" style="width:100%">العودة</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const prices = [
+      {type:"كرت برونزي", size:"5GB", value:"1000 ريال"},
+      {type:"كرت فضي", size:"15GB", value:"2500 ريال"},
+      {type:"كرت ذهبي", size:"30GB", value:"4500 ريال"},
+      {type:"كرت ماسي (VIP)", size:"70GB", value:"8000 ريال"},
+    ];
+    const stores = [
+      {branch:"المركز الرئيسي - شارع هايل", hours:"9ص - 10م"},
+      {branch:"فرع الحصبة - جوار الجامعة", hours:"10ص - 10م"},
+      {branch:"فرع حدة - المدينة مول", hours:"11ص - 11م"},
+      {branch:"فرع السبعين - أمام مستشفى 48", hours:"9ص - 9م"},
+    ];
+
+    const pricesBtn = document.getElementById('pricesBtn');
+    const storesBtn = document.getElementById('storesBtn');
+    const backBtns = document.querySelectorAll('.back-btn');
+    const loginBtn = document.getElementById('loginBtn');
+    const cardInput = document.getElementById('cardInput');
+    const copySupport = document.getElementById('copySupport');
+    const toast = document.getElementById('toast');
+    const pricesList = document.getElementById('pricesList');
+    const storesList = document.getElementById('storesList');
+
+    function switchView(viewId) {
+      const currentView = document.querySelector('.view-active');
+      const nextView = document.getElementById(viewId);
+      if(!nextView || currentView === nextView) return;
+      currentView.classList.add('view-is-leaving');
+      setTimeout(()=>{
+        currentView.classList.remove('view-active','view-is-leaving');
+        nextView.classList.add('view-active');
+      },200);
+    }
+
+    pricesBtn.addEventListener('click', ()=>switchView('prices-view'));
+    storesBtn.addEventListener('click', ()=>switchView('stores-view'));
+    backBtns.forEach(btn=>btn.addEventListener('click',()=>switchView('login-view')));
+
+    function populateLists(){
+      pricesList.innerHTML = prices.map(p=>`
+        <div class="item">
+          <div>
+            <div style="font-weight:700">${p.type}</div>
+            <div class="chip">${p.size}</div>
+          </div>
+          <div style="font-weight:600">${p.value}</div>
+        </div>
+      `).join('');
+
+      storesList.innerHTML = stores.map(s=>`
+        <div class="item">
+          <div>${s.branch}</div>
+          <div class="chip">${s.hours}</div>
+        </div>
+      `).join('');
+    }
+    populateLists();
+
+    loginBtn.addEventListener('click', ()=>{
+      if(cardInput.value.trim()===''){
+        showToast("الرجاء إدخال رقم الكرت");
+      } else {
+        showToast("تم تسجيل الدخول بنجاح");
+      }
+    });
+
+    copySupport.addEventListener('click', ()=>{
+      navigator.clipboard.writeText(copySupport.innerText)
+        .then(()=>showToast("تم نسخ رقم خدمة العملاء"))
+    });
+
+    function showToast(msg){
+      toast.textContent=msg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'),2500);
+    }
+  </script>
+
+</body>
+</html>
