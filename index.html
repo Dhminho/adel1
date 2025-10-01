@@ -102,9 +102,15 @@
 
     .card-header{ margin-bottom: 30px; display:flex; flex-direction:column; align-items:center; }
     
+    /* === ✅  التعديل الجذري لمشكلة الشعار === */
+    .logo {
+      width: 300px; /* التحكم بعرض الحاوية */
+      margin-bottom: 15px; /* إضافة هامش بسيط */
+    }
     .logo img{ 
-      width:300px; 
-      height: auto; /* تمت الإضافة لضمان ظهور الشعار على الجوال */
+      display: block; /* منع المسافات الغريبة */
+      width: 100%;  /* جعل الصورة تملأ الحاوية */
+      height: auto; /* الحفاظ على أبعاد الصورة */
       filter:drop-shadow(0 6px 20px rgba(0,0,0,0.6)); 
       animation:float-up-down 4s ease-in-out infinite; 
     }
@@ -181,9 +187,8 @@
 
     @media screen and (max-width: 480px) { 
       .main-container { padding: 20px; } 
-      .logo img { 
-        width: 170px; 
-        height: auto; /* تمت الإضافة لضمان ظهور الشعار على الجوال */
+      .logo { 
+        width: 170px; /* تصغير عرض الحاوية في الجوال */
       } 
       .title h1 { font-size: 28px; } 
       .actions { flex-direction: column; } 
@@ -331,7 +336,7 @@
         document.getElementById('percentageDisplay').textContent = `${Math.round(usedPercentage)}%`;
         document.getElementById('dataFill').style.width = `${usedPercentage}%`;
         document.getElementById('usedDataDisplay').textContent = `المستخدم: ${usedGB.toFixed(2)} جيجا`;
-        document.getElementById('remainingDataDisplay').textContent = `المتبقي: ${remainingDataDisplay.toFixed(2)} جيجا`;
+        document.getElementById('remainingDataDisplay').textContent = `المتبقي: ${remainingGB.toFixed(2)} جيجا`;
       }
       validityDisplay.textContent = userData.validity;
     }
@@ -369,4 +374,4 @@
   </script>
 
 </body>
-</html>
+</html>```
