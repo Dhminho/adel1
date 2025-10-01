@@ -80,7 +80,7 @@
       left:0;
       width:100%;
       height:100%;
-      background: url('https://i.ibb.co/Tx3B826F/066ab10d4e11.png') no-repeat center center;
+      background: url('background.svg') no-repeat center center;
       background-size: cover;
       opacity: 0.1;
       z-index: -1;
@@ -104,6 +104,7 @@
     
     .logo img{ 
       width:300px; 
+      height: auto; /* تمت الإضافة لضمان ظهور الشعار على الجوال */
       filter:drop-shadow(0 6px 20px rgba(0,0,0,0.6)); 
       animation:float-up-down 4s ease-in-out infinite; 
     }
@@ -178,7 +179,15 @@
     .slider.round { border-radius: 34px; }
     .slider.round:before { border-radius: 50%; }
 
-    @media screen and (max-width: 480px) { .main-container { padding: 20px; } .logo img { width: 170px; } .title h1 { font-size: 28px; } .actions { flex-direction: column; } }
+    @media screen and (max-width: 480px) { 
+      .main-container { padding: 20px; } 
+      .logo img { 
+        width: 170px; 
+        height: auto; /* تمت الإضافة لضمان ظهور الشعار على الجوال */
+      } 
+      .title h1 { font-size: 28px; } 
+      .actions { flex-direction: column; } 
+    }
   </style>
 </head>
 <body>
@@ -201,7 +210,7 @@
       <!-- ======================================= -->
       <div id="login-view" class="view-container view-active">
         <header class="card-header">
-          <div class="logo"><img src="https://static.wikia.nocookie.net/logopedia/images/e/e7/One_Piece_logo.svg" alt="شعار شبكة ون بيس"></div>
+          <div class="logo"><img src="logo.svg" alt="شعار شبكة ون بيس"></div>
           <div class="title">
             <h1>شبكة ون بيس اللاسلكية</h1>
             <p>مرحبًا بكم شبكة ون بيس نت</p>
@@ -322,7 +331,7 @@
         document.getElementById('percentageDisplay').textContent = `${Math.round(usedPercentage)}%`;
         document.getElementById('dataFill').style.width = `${usedPercentage}%`;
         document.getElementById('usedDataDisplay').textContent = `المستخدم: ${usedGB.toFixed(2)} جيجا`;
-        document.getElementById('remainingDataDisplay').textContent = `المتبقي: ${remainingGB.toFixed(2)} جيجا`;
+        document.getElementById('remainingDataDisplay').textContent = `المتبقي: ${remainingDataDisplay.toFixed(2)} جيجا`;
       }
       validityDisplay.textContent = userData.validity;
     }
