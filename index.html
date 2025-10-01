@@ -181,7 +181,7 @@
     .neon-stroke rect { fill: none; stroke: url(#neonGradient); stroke-width: 2; stroke-dasharray: 720, 1000; stroke-dashoffset: 720; rx: var(--radius); ry: var(--radius); animation: traceStroke 8s ease-in-out infinite; }
     @keyframes traceStroke { 0% { stroke-dashoffset: 720; opacity: 0; } 10% { opacity: 1; } 90% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
 
-    /* --- ✅ START: الأنماط الخاصة بالقائمة المنسدلة المخصصة --- */
+    /* --- START: الأنماط الخاصة بالقائمة المنسدلة المخصصة --- */
     .custom-select { position: relative; }
     .custom-select-trigger { display: flex; align-items: center; justify-content: center; text-align: center; padding: 18px; font-size: 16px; color: var(--text); background: var(--glass); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--radius); cursor: pointer; user-select: none; }
     .custom-select-trigger .arrow { margin-right: 15px; width: 10px; height: 10px; border-left: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg) translateY(-50%); transition: transform 0.2s ease; position: absolute; left: 25px; top: 45%; }
@@ -229,12 +229,57 @@
     .progress-bar-fill { height: 100%; background: var(--accent2); border-radius: 10px; transition: width 0.5s ease-in-out; }
     .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; color: var(--muted); }
 
-    @media screen and (max-width: 480px) { 
-      .main-container { padding: 20px; } 
-      .logo { width: 170px; max-width: 80%; } 
-      .title h1 { font-size: 28px; } 
-      .actions { flex-direction: column; } 
+    /* --- ✅ START: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
+    @media screen and (max-width: 480px) {
+      .main-container {
+        padding: 20px 15px;
+      }
+      .logo {
+        width: 170px;
+        max-width: 80%;
+      }
+      .title h1 {
+        font-size: 28px;
+      }
+      .actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .card-header {
+        margin-bottom: 20px;
+      }
+      .news-ticker-container {
+        margin-bottom: 20px;
+        padding: 0.8rem 1rem;
+      }
+      .news-ticker-content span {
+        font-size: 13px;
+      }
+      h2 {
+        font-size: 1.2rem;
+        margin: 20px 0 15px 0;
+      }
+      .input-wrapper {
+        margin-bottom: 15px;
+      }
+      .custom-select-trigger, .input {
+        padding: 15px;
+        font-size: 15px;
+      }
+      .btn {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 15px;
+      }
+      .ghost, .support-btn {
+        padding: 12px;
+      }
+      a.ghost {
+        margin-bottom: 15px;
+      }
     }
+    /* --- ✅ END: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
   </style>
 </head>
 <body>
@@ -279,7 +324,7 @@
         
         <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة والإعدادات</p>
         
-        <!-- ✅ START: الهيكل الجديد للقائمة المنسدلة المدمجة -->
+        <!-- START: الهيكل الجديد للقائمة المنسدلة المدمجة -->
         <div class="input-wrapper">
             <div id="customSelect" class="custom-select">
                 <div class="custom-select-trigger" data-selected-value="1">
@@ -302,7 +347,7 @@
                 </div>
             </div>
         </div>
-        <!-- ✅ END: الهيكل الجديد للقائمة المنسدلة المدمجة -->
+        <!-- END: الهيكل الجديد للقائمة المنسدلة المدمجة -->
 
         <button id="loginBtn" class="btn">تسجيل الدخول</button>
 
@@ -433,7 +478,7 @@
     }
     populateInfoLists();
 
-    // --- ✅ START: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
+    // --- START: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
     const customSelect = document.getElementById('customSelect');
     const selectTrigger = customSelect.querySelector('.custom-select-trigger');
     const options = customSelect.querySelectorAll('.custom-option');
@@ -450,18 +495,16 @@
       });
     });
 
-    // إيقاف إغلاق القائمة عند النقر على حاوية "إيقاف التحديثات"
     document.querySelector('.switch-container-custom').addEventListener('click', e => {
         e.stopPropagation();
     });
     
-    // إغلاق القائمة عند النقر في أي مكان آخر في الصفحة
     window.addEventListener('click', e => {
       if (!customSelect.contains(e.target)) {
         customSelect.classList.remove('open');
       }
     });
-    // --- ✅ END: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
+    // --- END: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
 
   </script>
 
