@@ -57,7 +57,7 @@
       to { background-position: 10000px 10000px; }
     }
     
-    .login-card {
+    .main-container {
       width: 100%;
       height: 100%;
       background: var(--card);
@@ -73,7 +73,7 @@
       justify-content: center;
     }
 
-    .login-card::before {
+    .main-container::before {
       content:"";
       position:absolute;
       top:0;
@@ -86,10 +86,12 @@
       z-index: -1;
       pointer-events: none;
     }
-
+    
     .content-wrapper {
       width: 100%;
-      max-width: 420px;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .view-container { display:none; width: 100%; }
@@ -107,65 +109,19 @@
     }
     @keyframes float-up-down { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
 
-    .title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .title h1 {
-      margin: 0;
-      font-size: 36px; 
-      font-weight: 800;
-      white-space: nowrap;       overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-    }
+    .title { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .title h1 { margin: 0; font-size: 36px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .title p { margin: 0; color: var(--muted); font-size: 16px; }
 
-    .title p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .input-wrapper {
-      position: relative;
-      width: 100%;
-      margin-bottom: 18px;
-    }
-
-    .input {
-      width: 100%;
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.04);
-      padding: 18px;
-      border-radius: var(--radius);
-      color: var(--text);
-      outline: none;
-      font-size: 16px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-    }
+    .input-wrapper { position: relative; width: 100%; margin-bottom: 18px; }
+    .input { width: 100%; background: var(--glass); border: 1px solid rgba(255,255,255,0.04); padding: 18px; border-radius: var(--radius); color: var(--text); outline: none; font-size: 16px; text-align: center; position: relative; z-index: 2; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     .input::placeholder{ color:rgba(255,255,255,0.35) }
+    select.input { background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239aa7bd%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: left 1.2em top 50%, 0 0; background-size: .65em auto, 100%; padding-right: 2.5em; }
+    select.input option { color: black; background: white; }
 
-    select.input {
-        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239aa7bd%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-        background-repeat: no-repeat;
-        background-position: left 1.2em top 50%, 0 0;
-        background-size: .65em auto, 100%;
-        padding-right: 2.5em; 
-    }
-    select.input option {
-        color: black;
-        background: white;
-    }
-
-
+    /* ======================================= */
+    /* === ✅ استعادة: ستايل الإضاءة المتحركة === */
+    /* ======================================= */
     .neon-stroke {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 1;
@@ -183,151 +139,53 @@
       100% { stroke-dashoffset: 0; opacity: 0; }
     }
 
-    .btn, .ghost, .support-btn, .back-btn {
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative; overflow: hidden;
-      border-radius: var(--radius);
-      text-decoration: none;
-    }
 
-    .btn {
-      width:100%; padding:18px; border:none; cursor:pointer;
-      font-weight:700; font-size:16px; background: var(--accent2);
-      color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6);
-      margin-top: 20px;
-      margin-bottom:20px;
-    }
-    .btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(123,97,255,0.4), 0 6px 16px rgba(0,0,0,0.6);
-      background: var(--accent1);
-    }
+    .btn, .ghost, .support-btn, .back-btn { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-radius: var(--radius); text-decoration: none; }
+    .btn { display: inline-block; width:100%; padding:18px; border:none; cursor:pointer; font-weight:700; font-size:16px; background: var(--accent2); color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6); margin-top: 20px; margin-bottom:20px; }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(123,97,255,0.4), 0 6px 16px rgba(0,0,0,0.6); background: var(--accent1); }
+    .ghost, .back-btn { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.08); color: var(--text); padding: 15px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .ghost:hover, .back-btn:hover { background: var(--glass); border-color: var(--neon); color: var(--neon); transform: translateY(-3px); box-shadow: 0 0 25px rgba(107, 224, 255, 0.5); }
+    .support-btn { width:100%; background: var(--glass); border: 1px solid var(--glass-border); color: var(--muted); padding: 15px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .support-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); transform: translateY(-3px); box-shadow: 0 0 20px rgba(255,255,255,0.15); }
     
-    .ghost, .back-btn {
-      flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text); padding: 15px; cursor: pointer; font-weight: 600;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .ghost:hover, .back-btn:hover {
-      background: var(--glass); border-color: var(--neon); color: var(--neon);
-      transform: translateY(-3px); box-shadow: 0 0 25px rgba(107, 224, 255, 0.5);
-    }
-
-    .support-btn {
-      width:100%; background: var(--glass); border: 1px solid var(--glass-border);
-      color: var(--muted); padding: 15px; cursor: pointer; font-weight: 600;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
-    .support-btn:hover {
-      color: var(--text); border-color: rgba(255,255,255,0.15);
-      transform: translateY(-3px); box-shadow: 0 0 20px rgba(255,255,255,0.15);
-    }
-
     .actions { display: flex; gap: 12px; margin-bottom: 20px; }
-
     .list{ display:grid; gap:12px; margin:20px 0; max-height:35vh; overflow-y:auto; padding:6px; }
-    .list .item{
-      background:rgba(255,255,255,0.03); padding:14px; border-radius: var(--radius);
-      display:flex; justify-content:space-between; align-items:center;
-      border:1px solid rgba(255,255,255,0.04);
-    }
-    .chip{ font-size:13px; color:var(--muted) }
-
+    .list .item{ background:rgba(255,255,255,0.03); padding:14px; border-radius: var(--radius); display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.04); }
     .toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:28px; background:rgba(12,18,26,0.9); color:var(--text); padding:14px 20px; border-radius:14px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 30px rgba(0,0,0,0.6); display:none; z-index:200; }
     .toast.show{ display:block; animation:toastIn .24s ease; }
     @keyframes toastIn{ from{opacity:0;transform:translate(-50%,10px)} to{opacity:1;transform:translate(-50%,0)} }
 
-    .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; fill: currentColor; }
-    
-    /* ======================================= */
-    /* === ✅ إضافة: ستايل مفتاح التحكم (Switch) === */
-    /* ======================================= */
-    .switch-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        background: var(--glass);
-        padding: 12px 18px;
-        border-radius: var(--radius);
-        border: 1px solid var(--glass-border);
-        margin-bottom: 10px;
-    }
-    .switch-container p {
-        margin: 0;
-        color: var(--muted);
-        font-weight: 600;
-    }
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    .switch input { 
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #334050;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-    input:checked + .slider {
-      background: var(--accent2);
-    }
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
-    }
-    input:checked + .slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
-    }
-    .slider.round {
-      border-radius: 34px;
-    }
-    .slider.round:before {
-      border-radius: 50%;
-    }
+    /* ستايل صفحة المستخدم */
+    .account-details { display:grid; gap:15px; margin:20px 0; width: 100%; }
+    .account-details .item { background:rgba(255,255,255,0.03); padding: 18px 22px; border-radius: var(--radius); display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.04); font-size: 16px; }
+    .item .label { font-weight: 700; color: var(--muted); }
+    .item .value { font-weight: 600; color: var(--text); }
+    .item .value.highlight { color: var(--neon); direction: ltr; }
+    .progress-section { background:rgba(255,255,255,0.03); padding: 18px 22px; border-radius: var(--radius); border:1px solid rgba(255,255,255,0.04); }
+    .progress-bar-container { width: 100%; height: 12px; background-color: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.05); }
+    .progress-bar-fill { height: 100%; background: var(--accent2); border-radius: 10px; transition: width 0.5s ease-in-out; }
+    .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; color: var(--muted); }
 
+    /* ستايل السويتش */
+    .switch-container { display: flex; align-items: center; justify-content: space-between; width: 100%; background: var(--glass); padding: 12px 18px; border-radius: var(--radius); border: 1px solid var(--glass-border); margin-bottom: 10px; }
+    .switch-container p { margin: 0; color: var(--muted); font-weight: 600; }
+    .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334050; transition: .4s; }
+    .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+    input:checked + .slider { background: var(--accent2); }
+    input:checked + .slider:before { transform: translateX(26px); }
+    .slider.round { border-radius: 34px; }
+    .slider.round:before { border-radius: 50%; }
 
-    @media screen and (max-width: 480px) {
-      .login-card {
-        padding: 20px;
-      }
-      .logo img {
-        width: 170px;
-      }
-      .title h1 {
-        font-size: 28px;
-      }
-      .actions {
-        flex-direction: column;
-      }
-    }
+    @media screen and (max-width: 480px) { .main-container { padding: 20px; } .logo img { width: 170px; } .title h1 { font-size: 28px; } .actions { flex-direction: column; } }
   </style>
 </head>
 <body>
 
+  <!-- ======================================= -->
+  <!-- === ✅ استعادة: SVG الخاص بالإضاءة === -->
+  <!-- ======================================= -->
   <svg width="0" height="0" style="position: absolute;">
     <defs>
       <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -338,14 +196,15 @@
     </defs>
   </svg>
 
-  <main class="login-card" role="main">
+  <main class="main-container" role="main">
     
     <div class="content-wrapper">
+      <!-- ======================================= -->
+      <!-- ===      1. شاشة تسجيل الدخول      === -->
+      <!-- ======================================= -->
       <div id="login-view" class="view-container view-active">
         <header class="card-header">
-          <div class="logo">
-            <img src="https://static.wikia.nocookie.net/logopedia/images/e/e7/One_Piece_logo.svg" alt="شعار شبكة ون بيس">
-          </div>
+          <div class="logo"><img src="https://static.wikia.nocookie.net/logopedia/images/e/e7/One_Piece_logo.svg" alt="شعار شبكة ون بيس"></div>
           <div class="title">
             <h1>شبكة ون بيس اللاسلكية</h1>
             <p>مرحبًا بكم شبكة ون بيس نت</p>
@@ -354,164 +213,131 @@
         <h2>تسجيل الدخول للشبكة</h2>
 
         <div class="input-wrapper">
-          <svg class="neon-stroke" viewBox="0 0 300 50" preserveAspectRatio="none">
-            <rect x="1" y="1" width="99%" height="48" />
-          </svg>
+          <!-- ✅ الإضاءة المتحركة هنا -->
+          <svg class="neon-stroke" viewBox="0 0 300 50" preserveAspectRatio="none"><rect x="1" y="1" width="99%" height="48" /></svg>
           <input id="cardInput" class="input" type="text" inputmode="numeric" placeholder="أدخل رقم الكرت هنا">
         </div>
         
         <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة المناسبة لك</p>
-
         <div class="input-wrapper">
-            <select id="speedSelect" class="input">
-              <option value="1">سرعه واحد ميجا</option>
-              <option value="2">سرعه 2 ميجا</option>
-              <option value="4">سرعه 4 ميجا</option>
-              <option value="high">سرعه عاليه جدا</option>
-            </select>
+          <select id="speedSelect" class="input">
+            <option value="1">سرعه واحد ميجا</option><option value="2">سرعه 2 ميجا</option><option value="4">سرعه 4 ميجا</option><option value="high">سرعه عاليه جدا</option>
+          </select>
         </div>
-
-        <!-- ======================================= -->
-        <!-- === ✅ إضافة: خيار إيقاف التحديثات === -->
-        <!-- ======================================= -->
         <div class="switch-container">
-            <p>ايقاف التحديثات</p>
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
+          <p>ايقاف التحديثات</p>
+          <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
         </div>
-
-
         <button id="loginBtn" class="btn">تسجيل الدخول</button>
         <div class="actions">
-          <button id="pricesBtn" class="ghost">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            الأسعار
-          </button>
-          <button id="storesBtn" class="ghost">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            نقاط البيع
-          </button>
+          <button id="pricesBtn" class="ghost">الأسعار</button>
+          <button id="storesBtn" class="ghost">نقاط البيع</button>
         </div>
-
-        <a href="https://www.tvquran.com/" target="_blank" rel="noopener noreferrer" class="ghost" style="width:100%; margin-bottom: 20px; background-color: rgba(111, 222, 175, 0.1); border-color: rgba(111, 222, 175, 0.4);">
-            انقر هنا لفتح موقع القرآن الكريم مجانًا
-        </a>
-
+        <a href="https://www.tvquran.com/" target="_blank" rel="noopener noreferrer" class="ghost" style="width:100%; margin-bottom: 20px; background-color: rgba(111, 222, 175, 0.1); border-color: rgba(111, 222, 175, 0.4);">انقر هنا لفتح موقع القرآن الكريم مجانًا</a>
         <button id="copySupport" class="support-btn" data-number="772950532">خدمة العملاء: 772950532</button>
       </div>
 
-      <div id="prices-view" class="view-container">
-        <h2>قائمة الأسعار — حجم الباقات</h2>
-        <div class="list" id="pricesList"></div>
-        <button class="ghost back-btn" style="width:100%">العودة</button>
+      <!-- ======================================= -->
+      <!-- ===       2. شاشة المستخدم        === -->
+      <!-- ======================================= -->
+      <div id="dashboard-view" class="view-container">
+        <header class="card-header">
+          <div class="title"><h1>مرحباً بك</h1><p>تفاصيل حسابك الحالية</p></div>
+        </header>
+        <div class="account-details">
+          <div class="item"><span class="label">اسم المستخدم</span><span id="usernameDisplay" class="value highlight"></span></div>
+          <div id="limited-account-view" class="progress-section" style="display: none;">
+            <div class="item" style="background:none; padding:0; border:none;"><span class="label">استهلاك الباقة</span><span id="percentageDisplay" class="value"></span></div>
+            <div class="progress-bar-container"><div id="dataFill" class="progress-bar-fill"></div></div>
+            <div class="progress-labels"><span id="usedDataDisplay"></span><span id="remainingDataDisplay"></span></div>
+          </div>
+          <div id="unlimited-account-view" class="item" style="display: none;"><span class="label">استهلاك الباقة</span><span class="value" style="color: var(--neon);">غير محدود (Unlimited)</span></div>
+          <div class="item"><span class="label">الصلاحية المتبقية</span><span id="validityDisplay" class="value"></span></div>
+        </div>
+        <button id="logoutBtn" class="btn">تسجيل الخروج</button>
       </div>
 
+      <!-- شاشات الأسعار ونقاط البيع -->
+      <div id="prices-view" class="view-container">
+        <h2>قائمة الأسعار — حجم الباقات</h2><div class="list" id="pricesList"></div><button class="ghost back-btn" style="width:100%">العودة</button>
+      </div>
       <div id="stores-view" class="view-container">
-        <h2>نقاط البيع</h2>
-        <div class="list" id="storesList"></div>
-        <button class="ghost back-btn" style="width:100%">العودة</button>
+        <h2>نقاط البيع</h2><div class="list" id="storesList"></div><button class="ghost back-btn" style="width:100%">العودة</button>
       </div>
     </div>
   </main>
-
+  
   <div id="toast" class="toast"></div>
 
   <script>
-    const prices = [
-      {value:"ابو 100 ريال", size:"400 ميجا"},
-      {value:"ابو 200 ريال", size:"800 ميجا"},
-      {value:"ابو 300 ريال", size:"1024 ميجا"},
-      {value:"ابو 500 ريال", size:"2 جيجا"},
-      {value:"ابو 1000 ريال", size:"4 جيجا"},
-      {value:"ابو 1500 ريال", size:"6 جيجا"},
-      {value:"ابو 3000 ريال", size:"12 جيجا"},
-      {value:"ابو 3500 ريال", size:"14 جيجا"}
-    ];
-
-    const stores = [
-      {branch:"البقالات المجاوره للشبكه", hours:"خدمة على مدار الساعة"},
-    ];
-
-    const pricesBtn = document.getElementById('pricesBtn');
-    const storesBtn = document.getElementById('storesBtn');
-    const backBtns = document.querySelectorAll('.back-btn');
-    const loginBtn = document.getElementById('loginBtn');
-    const cardInput = document.getElementById('cardInput');
-    const copySupport = document.getElementById('copySupport');
-    const toast = document.getElementById('toast');
-    const pricesList = document.getElementById('pricesList');
-    const storesList = document.getElementById('storesList');
+    const dummyUsers = { "1111111111": { cardNumber: "1111111111", validity: "يومان و 5 ساعات", usage: { isUnlimited: false, totalGB: 12, usedGB: 4.5 } }, "2222222222": { cardNumber: "2222222222", validity: "28 يوماً", usage: { isUnlimited: true } } };
+    const prices = [ {value:"ابو 100 ريال", size:"400 ميجا"}, {value:"ابو 200 ريال", size:"800 ميجا"}, {value:"ابو 300 ريال", size:"1024 ميجا"}, {value:"ابو 500 ريال", size:"2 جيجا"}, {value:"ابو 1000 ريال", size:"4 جيجا"}, {value:"ابو 1500 ريال", size:"6 جيجا"}, {value:"ابو 3000 ريال", size:"12 جيجا"}, {value:"ابو 3500 ريال", size:"14 جيجا"} ];
+    const stores = [ {branch:"البقالات المجاوره للشبكه", hours:"خدمة على مدار الساعة"} ];
+    
+    const cardInput = document.getElementById('cardInput'), loginBtn = document.getElementById('loginBtn'), logoutBtn = document.getElementById('logoutBtn'), pricesBtn = document.getElementById('pricesBtn'), storesBtn = document.getElementById('storesBtn'), backBtns = document.querySelectorAll('.back-btn'), copySupport = document.getElementById('copySupport'), toast = document.getElementById('toast'), usernameDisplay = document.getElementById('usernameDisplay'), limitedView = document.getElementById('limited-account-view'), unlimitedView = document.getElementById('unlimited-account-view'), validityDisplay = document.getElementById('validityDisplay');
 
     function switchView(viewId) {
-      const currentView = document.querySelector('.view-active');
+      const currentView = document.querySelector('.view-container.view-active');
       const nextView = document.getElementById(viewId);
       if(!nextView || currentView === nextView) return;
       currentView.classList.add('view-is-leaving');
       setTimeout(()=>{
-        currentView.classList.remove('view-active','view-is-leaving');
+        currentView.classList.remove('view-active', 'view-is-leaving');
         nextView.classList.add('view-active');
-      },200);
+      }, 200);
+    }
+    
+    function showToast(msg){
+      toast.textContent = msg; toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
     }
 
-    pricesBtn.addEventListener('click', ()=>switchView('prices-view'));
-    storesBtn.addEventListener('click', ()=>switchView('stores-view'));
-    backBtns.forEach(btn=>btn.addEventListener('click',()=>switchView('login-view')));
-
-    function populateLists(){
-      pricesList.innerHTML = prices.map(p=>`
-        <div class="item">
-          <div style="font-weight:700">${p.value}</div>
-          <div style="font-weight:600; color: var(--neon);">${p.size}</div>
-        </div>
-      `).join('');
-
-      storesList.innerHTML = stores.map(s=>`
-        <div class="item">
-          <div>${s.branch}</div>
-          <div class="chip">${s.hours}</div>
-        </div>
-      `).join('');
-    }
-    populateLists();
-
-    loginBtn.addEventListener('click', ()=>{
-      if(cardInput.value.trim()===''){
-        showToast("الرجاء إدخال رقم الكرت");
+    function populateDashboard(userData) {
+      usernameDisplay.textContent = userData.cardNumber.substring(0, Math.floor(userData.cardNumber.length / 2)) + '****';
+      limitedView.style.display = 'none'; unlimitedView.style.display = 'none';
+      if (userData.usage.isUnlimited) {
+        unlimitedView.style.display = 'flex';
       } else {
-        showToast("تم تسجيل الدخول بنجاح");
+        limitedView.style.display = 'block';
+        const { totalGB, usedGB } = userData.usage, remainingGB = totalGB - usedGB, usedPercentage = (usedGB / totalGB) * 100;
+        document.getElementById('percentageDisplay').textContent = `${Math.round(usedPercentage)}%`;
+        document.getElementById('dataFill').style.width = `${usedPercentage}%`;
+        document.getElementById('usedDataDisplay').textContent = `المستخدم: ${usedGB.toFixed(2)} جيجا`;
+        document.getElementById('remainingDataDisplay').textContent = `المتبقي: ${remainingGB.toFixed(2)} جيجا`;
+      }
+      validityDisplay.textContent = userData.validity;
+    }
+
+    loginBtn.addEventListener('click', () => {
+      const cardNumber = cardInput.value.trim();
+      if (cardNumber === '') return showToast("الرجاء إدخال رقم الكرت");
+      const user = dummyUsers[cardNumber];
+      if (user) {
+        populateDashboard(user);
+        switchView('dashboard-view');
+      } else {
+        showToast("رقم الكرت غير صحيح");
       }
     });
 
-    copySupport.addEventListener('click', ()=>{
-      const numberToCopy = copySupport.dataset.number;
-      navigator.clipboard.writeText(numberToCopy)
-        .then(()=>showToast("تم نسخ رقم خدمة العملاء"))
-    });
-
-    const arabicToEnglishNumerals = (str) => {
-        const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-        let newStr = String(str);
-        for (let i = 0; i < arabicNumerals.length; i++) {
-            const regex = new RegExp(arabicNumerals[i], 'g');
-            newStr = newStr.replace(regex, i);
-        }
-        return newStr;
-    };
-
+    logoutBtn.addEventListener('click', () => { cardInput.value = ''; switchView('login-view'); });
+    pricesBtn.addEventListener('click', () => switchView('prices-view'));
+    storesBtn.addEventListener('click', () => switchView('stores-view'));
+    backBtns.forEach(btn => btn.addEventListener('click', () => switchView('login-view')));
+    copySupport.addEventListener('click', () => { navigator.clipboard.writeText(copySupport.dataset.number).then(() => showToast("تم نسخ رقم خدمة العملاء")); });
+    
     cardInput.addEventListener('input', (event) => {
-        let value = event.target.value;
-        value = arabicToEnglishNumerals(value);
-        value = value.replace(/[^0-9]/g, '');
-        event.target.value = value;
+      const arabicNumerals = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+      let value = event.target.value;
+      for (let i = 0; i < arabicNumerals.length; i++) { value = value.replace(new RegExp(arabicNumerals[i], 'g'), i); }
+      event.target.value = value.replace(/[^0-9]/g, '');
     });
-
-    function showToast(msg){
-      toast.textContent=msg;
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'),2500);
+    
+    function populateInfoLists() {
+      document.getElementById('pricesList').innerHTML = prices.map(p => `<div class="item"><div>${p.value}</div><div class="value highlight">${p.size}</div></div>`).join('');
+      document.getElementById('storesList').innerHTML = stores.map(s => `<div class="item"><div>${s.branch}</div><div>${s.hours}</div></div>`).join('');
     }
+    populateInfoLists();
   </script>
 
 </body>
