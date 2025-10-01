@@ -165,7 +165,7 @@
     .circle:nth-of-type(1) { background: rgba(254, 83, 186, 0.636); }
     .circle:nth-of-type(2) { background: rgba(142, 81, 234, 0.704); }
     .news-ticker-content { display: flex; width: fit-content; animation: marquee-ltr 45s linear infinite; position: relative; z-index: 2; }
-    .news-ticker-content span { white-space: nowrap; padding: 0 25px; z-index: 2; font-family: "Cairo", "Avalors Personal Use", sans-serif; font-size: 15px; letter-spacing: 0px; color: #ffffff; text-shadow: 0 0 4px white; }
+    .news-ticker-content span { white-space: nowrap; padding: 0 25px; z-index: 2; font-family: "Cairo", "Avalors Personal Use", sans-serif; font-size: 15px; letter-spacing: 2px; color: #ffffff; text-shadow: 0 0 4px white; }
     @keyframes marquee-ltr { from { transform: translateX(-12%); } to { transform: translateX(100%); } }
     @keyframes animStar { from { transform: translateY(0); } to { transform: translateY(-135rem); } }
     @keyframes animStarRotate { from { transform: rotate(360deg); } to { transform: rotate(0); } }
@@ -203,15 +203,13 @@
     .slider.round:before { border-radius: 50%; }
     /* --- END: الأنماط الخاصة بالقائمة المنسدلة المخصصة --- */
 
-    .btn, .ghost, .support-btn, .back-btn { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-radius: var(--radius); text-decoration: none; }
+    .btn, .ghost, .back-btn { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-radius: var(--radius); text-decoration: none; }
     .btn { display: inline-block; width:100%; padding:18px; border:none; cursor:pointer; font-weight:700; font-size:16px; background: var(--accent2); color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6); margin-top: 20px; margin-bottom:20px; }
     .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(123,97,255,0.4), 0 6px 16px rgba(0,0,0,0.6); background: var(--accent1); }
     .ghost, .back-btn { flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.08); color: var(--text); padding: 15px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .ghost:hover, .back-btn:hover { background: var(--glass); border-color: var(--neon); color: var(--neon); transform: translateY(-3px); box-shadow: 0 0 25px rgba(107, 224, 255, 0.5); }
-    .support-btn { width:100%; background: var(--glass); border: 1px solid var(--glass-border); color: var(--muted); padding: 15px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .support-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); transform: translateY(-3px); box-shadow: 0 0 20px rgba(255,255,255,0.15); }
     
-    .actions { display: flex; gap: 12px; margin-bottom: 20px; }
+    .actions { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 20px; width: 100%; }
     .list{ display:grid; gap:12px; margin:20px 0; max-height:35vh; overflow-y:auto; padding:6px; }
     .list .item{ background:rgba(255,255,255,0.03); padding:14px; border-radius: var(--radius); display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.04); }
     .toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:28px; background:rgba(12,18,26,0.9); color:var(--text); padding:14px 20px; border-radius:14px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 30px rgba(0,0,0,0.6); display:none; z-index:200; }
@@ -229,57 +227,23 @@
     .progress-bar-fill { height: 100%; background: var(--accent2); border-radius: 10px; transition: width 0.5s ease-in-out; }
     .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; color: var(--muted); }
 
-    /* --- ✅ START: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
+    /* --- START: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
     @media screen and (max-width: 480px) {
-      .main-container {
-        padding: 20px 15px;
-      }
-      .logo {
-        width: 170px;
-        max-width: 80%;
-      }
-      .title h1 {
-        font-size: 28px;
-      }
-      .actions {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 15px;
-      }
-      .card-header {
-        margin-bottom: 20px;
-      }
-      .news-ticker-container {
-        margin-bottom: 20px;
-        padding: 0.8rem 1rem;
-      }
-      .news-ticker-content span {
-        font-size: 13px;
-      }
-      h2 {
-        font-size: 1.2rem;
-        margin: 20px 0 15px 0;
-      }
-      .input-wrapper {
-        margin-bottom: 15px;
-      }
-      .custom-select-trigger, .input {
-        padding: 15px;
-        font-size: 15px;
-      }
-      .btn {
-        margin-top: 15px;
-        margin-bottom: 15px;
-        padding: 15px;
-      }
-      .ghost, .support-btn {
-        padding: 12px;
-      }
-      a.ghost {
-        margin-bottom: 15px;
-      }
+      .main-container { padding: 20px 15px; }
+      .logo { width: 170px; max-width: 80%; }
+      .title h1 { font-size: 28px; }
+      .actions { flex-direction: row; gap: 10px; margin-bottom: 15px; }
+      .card-header { margin-bottom: 20px; }
+      .news-ticker-container { margin-bottom: 20px; } /* ✅ تم إزالة الـ padding من هنا */
+      .news-ticker-content span { font-size: 13px; }
+      h2 { font-size: 1.2rem; margin: 20px 0 15px 0; }
+      .input-wrapper { margin-bottom: 15px; }
+      .custom-select-trigger, .input { padding: 15px; font-size: 15px; }
+      .btn { margin-top: 15px; margin-bottom: 0; padding: 15px; }
+      .ghost { padding: 12px 10px; font-size: 13px; gap: 6px; }
+      a.ghost { margin-bottom: 15px; }
     }
-    /* --- ✅ END: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
+    /* --- END: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
   </style>
 </head>
 <body>
@@ -324,7 +288,6 @@
         
         <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة والإعدادات</p>
         
-        <!-- START: الهيكل الجديد للقائمة المنسدلة المدمجة -->
         <div class="input-wrapper">
             <div id="customSelect" class="custom-select">
                 <div class="custom-select-trigger" data-selected-value="1">
@@ -347,7 +310,6 @@
                 </div>
             </div>
         </div>
-        <!-- END: الهيكل الجديد للقائمة المنسدلة المدمجة -->
 
         <button id="loginBtn" class="btn">تسجيل الدخول</button>
 
@@ -355,7 +317,7 @@
             <svg id="fi_18365387" enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icon"><path clip-rule="evenodd" d="m97.4989471 31.3489647v46.1655388c-5.6463928-1.3915939-11.4440231-2.0746307-17.2588654-2.0322723-11.6449661 0-22.1310616 2.5542679-28.2174454 6.630806v-5.2891693c2.305748-4.0040207 10.3509064-8.0397491 21.3497238-8.0397491 4.8478317-.0566635 9.6602631.8227158 14.1750488 2.5906219.1526108.0679932.3127747.1186142.477478.1518555.595314.1208725 1.214798-.0015106 1.7202148-.3392105.2749939-.1820755.5069275-.4223175.6776657-.7048569.1382523-.2266541.2364731-.4751892.2908554-.7350845.0339966-.1669617.0491104-.3376999.0453339-.5084381v-39.3229543c2.2748032.3339291 4.5267792.812891 6.7410431 1.4331532zm-70.8704662 37.4343758v.0007553c-4.8478298-.0566559-9.6610432.8242264-14.1758327 2.5919876-.1541172.0687485-.3150349.1201172-.4804907.1526031-1.2336969.2470398-2.434165-.5499954-2.6857805-1.7821655-.0332413-.1662066-.0483513-.3354416-.0453291-.5054245v-39.3248844c-2.2755752.3346825-4.526782.8144016-6.7410483 1.4361668v46.1635971c5.6471648-1.3930969 11.44557-2.0759811 17.2611847-2.0338211 11.3192749 0 21.5508614 2.4123154 27.6991272 6.2908096v-5.7469559c-3.1971394-4.3016586-11.5209957-7.2442856-20.8313995-7.2442856zm0-50.8922959v.0007553c-4.3583298-.0339966-8.692482.6648216-12.8196945 2.067667v46.0843124c4.1597023-1.2389755 8.4803181-1.8531876 12.8196945-1.8237305 8.3277264 0 15.9013729 2.1365204 20.8313999 5.6253128l.0007553-1.3636475c.0007553-.1684723.0211525-.3361969.0596809-.5001221v-42.7655199c-3.1555595-4.3523331-11.5248604-7.3282185-20.8913517-7.3282185zm59.5680142 48.1537171v-46.0881749c-4.1264343-1.4029236-8.4605865-2.1024818-12.8196945-2.0684414-9.7962303 0-18.5024414 3.2538052-21.2897568 7.9326019v44.3552933c4.9099083-3.686058 12.7019119-5.9577637 21.2897644-5.9577637 4.3395691-.0279541 8.6592178.5870132 12.818924 1.8244781z" fill-rule="evenodd"></path></svg>
             انقر هنا لفتح موقع القرآن الكريم مجانًا
         </a>
-
+        
         <div class="actions">
           <button id="pricesBtn" class="ghost">
             <svg height="512" viewBox="0 0 32 32" width="512" xmlns="http://www.w3.org/2000/svg" class="icon"><g id="Layer_2" data-name="Layer 2"><circle cx="19" cy="20" r="1"></circle><circle cx="13" cy="12" r="1"></circle><path d="m28.724 13.11-1.147-1.147a1.994 1.994 0 0 1 -.588-1.419v-1.621a4.019 4.019 0 0 0 -4.014-4.015h-1.622a1.99 1.99 0 0 1 -1.419-.588l-1.147-1.146a4.019 4.019 0 0 0 -5.677 0l-1.147 1.146a1.99 1.99 0 0 1 -1.419.588h-1.621a4.019 4.019 0 0 0 -4.015 4.015v1.621a1.994 1.994 0 0 1 -.588 1.42l-1.146 1.146a4.019 4.019 0 0 0 0 5.677l1.146 1.148a1.986 1.986 0 0 1 .588 1.418v1.622a4.019 4.019 0 0 0 4.015 4.014h1.621a2 2 0 0 1 1.42.588l1.146 1.147a4.018 4.018 0 0 0 5.677 0l1.148-1.147a1.99 1.99 0 0 1 1.418-.588h1.622a4.019 4.019 0 0 0 4.014-4.014v-1.622a1.99 1.99 0 0 1 .588-1.418l1.147-1.147a4.019 4.019 0 0 0 0-5.678zm-18.724-1.11a3 3 0 1 1 3 3 3 3 0 0 1 -3-3zm2.957 8.457a1 1 0 0 1 -1.414-1.414l7.5-7.5a1 1 0 0 1 1.414 1.414zm6.043 2.543a3 3 0 1 1 3-3 3 3 0 0 1 -3 3z"></path></g></svg>
@@ -365,12 +327,12 @@
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             نقاط البيع
           </button>
+          <button id="copySupport" class="ghost" data-number="772950532">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h4v1h-7v2h6c1.66 0 3-1.34 3-3V10c0-4.97-4.03-9-9-9z"/></svg>
+              خدمة العملاء
+          </button>
         </div>
 
-        <button id="copySupport" class="support-btn" data-number="772950532">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h4v1h-7v2h6c1.66 0 3-1.34 3-3V10c0-4.97-4.03-9-9-9z"/></svg>
-            خدمة العملاء: 772950532
-        </button>
       </div>
 
       <div id="dashboard-view" class="view-container">
@@ -445,7 +407,6 @@
       const selectedSpeed = document.querySelector('.custom-select-trigger').dataset.selectedValue;
       const stopUpdates = document.getElementById('updatesSwitch').checked;
 
-      // يمكنك الآن استخدام قيم selectedSpeed و stopUpdates عند تسجيل الدخول
       console.log("السرعة المختارة:", selectedSpeed);
       console.log("إيقاف التحديثات:", stopUpdates);
 
