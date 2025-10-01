@@ -125,7 +125,7 @@
     .title h1 { margin: 0; font-size: 36px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
     .title p { margin: 0; color: var(--muted); font-size: 16px; }
 
-    /* --- ✅ START: الكود المدمج للشريط الإخباري (مع تعديل انحناء الزوايا) --- */
+    /* --- START: الكود المدمج للشريط الإخباري --- */
     .news-ticker-container {
       position: relative;
       width: 100%;
@@ -135,7 +135,7 @@
       background-size: 300% 300%;
       cursor: pointer;
       backdrop-filter: blur(1rem);
-      border-radius: var(--radius); /* ✅ تم التعديل هنا */
+      border-radius: var(--radius);
       transition: 0.5s;
       animation: gradient_301 5s ease infinite;
       border: double 4px transparent;
@@ -152,167 +152,56 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
     
-    .news-ticker-container:hover {
-      transform: scale(1.02);
-    }
-    
-    .news-ticker-container:active {
-      border: double 4px #fe53bb;
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-      animation: none;
-    }
-    
-    .news-ticker-container:active .circle {
-      background: #fe53bb;
-    }
-
-    #container-stars {
-      position: absolute;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      transition: 0.5s;
-      backdrop-filter: blur(1rem);
-      border-radius: var(--radius); /* ✅ تم التعديل هنا */
-      top: 0;
-      left: 0;
-    }
-
-    .news-ticker-container:hover #container-stars {
-      z-index: 1;
-      background-color: #212121;
-    }
-
-    #stars {
-      position: relative;
-      background: transparent;
-      width: 200rem;
-      height: 200rem;
-    }
-
-    #stars::after {
-      content: "";
-      position: absolute;
-      top: -10rem;
-      left: -100rem;
-      width: 100%;
-      height: 100%;
-      animation: animStarRotate 90s linear infinite;
-      background-image: radial-gradient(#ffffff 1px, transparent 1%);
-      background-size: 50px 50px;
-    }
-
-    #stars::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 170%;
-      height: 500%;
-      animation: animStar 60s linear infinite;
-      background-image: radial-gradient(#ffffff 1px, transparent 1%);
-      background-size: 50px 50px;
-      opacity: 0.5;
-    }
-
-    #glow {
-      position: absolute;
-      display: flex;
-      width: 12rem;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .circle {
-      width: 100%;
-      height: 30px;
-      filter: blur(2rem);
-      animation: pulse_3011 4s infinite;
-      z-index: -1;
-    }
-
-    .circle:nth-of-type(1) {
-      background: rgba(254, 83, 186, 0.636);
-    }
-
-    .circle:nth-of-type(2) {
-      background: rgba(142, 81, 234, 0.704);
-    }
-
-    .news-ticker-content {
-      display: flex;
-      width: fit-content;
-      animation: marquee-ltr 45s linear infinite;
-      position: relative;
-      z-index: 2;
-    }
-
-    .news-ticker-content span {
-      white-space: nowrap;
-      padding: 0 25px;
-      z-index: 2;
-      font-family: "Cairo", "Avalors Personal Use", sans-serif;
-      font-size: 15px;
-      letter-spacing: 2px;
-      color: #ffffff;
-      text-shadow: 0 0 4px white;
-    }
-
-    @keyframes marquee-ltr {
-      0% { transform: translateX(-12%); }
-      100% { transform: translateX(100%); }
-    }
-
-    @keyframes animStar {
-      from { transform: translateY(0); }
-      to { transform: translateY(-135rem); }
-    }
-
-    @keyframes animStarRotate {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0); }
-    }
-
-    @keyframes gradient_301 {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes pulse_3011 {
-      0% { transform: scale(0.75); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
-      100% { transform: scale(0.75); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-    }
+    .news-ticker-container:hover { transform: scale(1.02); }
+    .news-ticker-container:active { border: double 4px #fe53bb; background-origin: border-box; background-clip: content-box, border-box; animation: none; }
+    .news-ticker-container:active .circle { background: #fe53bb; }
+    #container-stars { position: absolute; z-index: -1; width: 100%; height: 100%; overflow: hidden; transition: 0.5s; backdrop-filter: blur(1rem); border-radius: var(--radius); top: 0; left: 0; }
+    .news-ticker-container:hover #container-stars { z-index: 1; background-color: #212121; }
+    #stars { position: relative; background: transparent; width: 200rem; height: 200rem; }
+    #stars::after { content: ""; position: absolute; top: -10rem; left: -100rem; width: 100%; height: 100%; animation: animStarRotate 90s linear infinite; background-image: radial-gradient(#ffffff 1px, transparent 1%); background-size: 50px 50px; }
+    #stars::before { content: ""; position: absolute; top: 0; left: -50%; width: 170%; height: 500%; animation: animStar 60s linear infinite; background-image: radial-gradient(#ffffff 1px, transparent 1%); background-size: 50px 50px; opacity: 0.5; }
+    #glow { position: absolute; display: flex; width: 12rem; top: 0; left: 50%; transform: translateX(-50%); }
+    .circle { width: 100%; height: 30px; filter: blur(2rem); animation: pulse_3011 4s infinite; z-index: -1; }
+    .circle:nth-of-type(1) { background: rgba(254, 83, 186, 0.636); }
+    .circle:nth-of-type(2) { background: rgba(142, 81, 234, 0.704); }
+    .news-ticker-content { display: flex; width: fit-content; animation: marquee-ltr 45s linear infinite; position: relative; z-index: 2; }
+    .news-ticker-content span { white-space: nowrap; padding: 0 25px; z-index: 2; font-family: "Cairo", "Avalors Personal Use", sans-serif; font-size: 15px; letter-spacing: 2px; color: #ffffff; text-shadow: 0 0 4px white; }
+    @keyframes marquee-ltr { from { transform: translateX(-12%); } to { transform: translateX(100%); } }
+    @keyframes animStar { from { transform: translateY(0); } to { transform: translateY(-135rem); } }
+    @keyframes animStarRotate { from { transform: rotate(360deg); } to { transform: rotate(0); } }
+    @keyframes gradient_301 { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes pulse_3011 { 0% { transform: scale(0.75); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); } 100% { transform: scale(0.75); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } }
     /* --- END: الكود المدمج للشريط الإخباري --- */
-
 
     .input-wrapper { position: relative; width: 100%; margin-bottom: 18px; }
     .input { width: 100%; background: var(--glass); border: 1px solid rgba(255,255,255,0.04); padding: 18px; border-radius: var(--radius); color: var(--text); outline: none; font-size: 16px; text-align: center; position: relative; z-index: 2; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     .input::placeholder{ color:rgba(255,255,255,0.35) }
-    select.input { background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239aa7bd%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: left 1.2em top 50%, 0 0; background-size: .65em auto, 100%; padding-right: 2.5em; }
-    select.input option { color: black; background: white; }
 
-    .neon-stroke {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 1;
-    }
-    .neon-stroke rect {
-      fill: none; stroke: url(#neonGradient); stroke-width: 2;
-      stroke-dasharray: 720, 1000; stroke-dashoffset: 720;
-      rx: var(--radius); ry: var(--radius);
-      animation: traceStroke 8s ease-in-out infinite;
-    }
-    @keyframes traceStroke {
-      0% { stroke-dashoffset: 720; opacity: 0; }
-      10% { opacity: 1; }
-      90% { stroke-dashoffset: 0; opacity: 1; }
-      100% { stroke-dashoffset: 0; opacity: 0; }
-    }
+    .neon-stroke { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .neon-stroke rect { fill: none; stroke: url(#neonGradient); stroke-width: 2; stroke-dasharray: 720, 1000; stroke-dashoffset: 720; rx: var(--radius); ry: var(--radius); animation: traceStroke 8s ease-in-out infinite; }
+    @keyframes traceStroke { 0% { stroke-dashoffset: 720; opacity: 0; } 10% { opacity: 1; } 90% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
 
+    /* --- ✅ START: الأنماط الخاصة بالقائمة المنسدلة المخصصة --- */
+    .custom-select { position: relative; }
+    .custom-select-trigger { display: flex; align-items: center; justify-content: center; text-align: center; padding: 18px; font-size: 16px; color: var(--text); background: var(--glass); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--radius); cursor: pointer; user-select: none; }
+    .custom-select-trigger .arrow { margin-right: 15px; width: 10px; height: 10px; border-left: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg) translateY(-50%); transition: transform 0.2s ease; position: absolute; left: 25px; top: 45%; }
+    .custom-select.open .custom-select-trigger .arrow { transform: rotate(135deg) translateY(0); }
+    .custom-options { position: absolute; display: block; top: 100%; left: 0; right: 0; background: #1a242f; border: 1px solid var(--glass-border); border-radius: var(--radius); margin-top: 8px; transition: all 0.2s ease-out; opacity: 0; visibility: hidden; transform: translateY(10px); z-index: 100; padding: 8px; }
+    .custom-select.open .custom-options { opacity: 1; visibility: visible; transform: translateY(0); }
+    .custom-option { position: relative; padding: 12px 18px; cursor: pointer; border-radius: 12px; transition: background-color 0.2s ease; }
+    .custom-option:hover { background-color: var(--glass); }
+    .custom-option-divider { height: 1px; background-color: var(--glass-border); margin: 8px 10px; }
+    .switch-container-custom { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 12px 18px; cursor: default; }
+    .switch-container-custom p { margin: 0; color: var(--muted); font-weight: 600; }
+    .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334050; transition: .4s; }
+    .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+    input:checked + .slider { background: var(--accent2); }
+    input:checked + .slider:before { transform: translateX(26px); }
+    .slider.round { border-radius: 34px; }
+    .slider.round:before { border-radius: 50%; }
+    /* --- END: الأنماط الخاصة بالقائمة المنسدلة المخصصة --- */
 
     .btn, .ghost, .support-btn, .back-btn { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; border-radius: var(--radius); text-decoration: none; }
     .btn { display: inline-block; width:100%; padding:18px; border:none; cursor:pointer; font-weight:700; font-size:16px; background: var(--accent2); color:#fff; box-shadow: 0 6px 20px rgba(123,97,255,0.2), 0 2px 8px rgba(0,0,0,0.6); margin-top: 20px; margin-bottom:20px; }
@@ -330,7 +219,6 @@
     @keyframes toastIn{ from{opacity:0;transform:translate(-50%,10px)} to{opacity:1;transform:translate(-50%,0)} }
     
     .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; fill: currentColor; }
-
     .account-details { display:grid; gap:15px; margin:20px 0; width: 100%; }
     .account-details .item { background:rgba(255,255,255,0.03); padding: 18px 22px; border-radius: var(--radius); display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.04); font-size: 16px; }
     .item .label { font-weight: 700; color: var(--muted); }
@@ -341,23 +229,9 @@
     .progress-bar-fill { height: 100%; background: var(--accent2); border-radius: 10px; transition: width 0.5s ease-in-out; }
     .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; color: var(--muted); }
 
-    .switch-container { display: flex; align-items: center; justify-content: space-between; width: 100%; background: var(--glass); padding: 12px 18px; border-radius: var(--radius); border: 1px solid var(--glass-border); margin-bottom: 10px; }
-    .switch-container p { margin: 0; color: var(--muted); font-weight: 600; }
-    .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334050; transition: .4s; }
-    .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
-    input:checked + .slider { background: var(--accent2); }
-    input:checked + .slider:before { transform: translateX(26px); }
-    .slider.round { border-radius: 34px; }
-    .slider.round:before { border-radius: 50%; }
-
     @media screen and (max-width: 480px) { 
       .main-container { padding: 20px; } 
-      .logo { 
-        width: 170px;
-        max-width: 80%;
-      } 
+      .logo { width: 170px; max-width: 80%; } 
       .title h1 { font-size: 28px; } 
       .actions { flex-direction: column; } 
     }
@@ -387,21 +261,14 @@
           </div>
         </header>
 
-        <!-- ✅ الهيكل الجديد للشريط الإخباري مع التأثيرات المدمجة -->
         <div class="news-ticker-container">
-          <div id="container-stars">
-              <div id="stars"></div>
-          </div>
-          <div id="glow">
-              <div class="circle"></div>
-              <div class="circle"></div>
-          </div>
+          <div id="container-stars"><div id="stars"></div></div>
+          <div id="glow"><div class="circle"></div><div class="circle"></div></div>
           <div class="news-ticker-content">
             <span>أهلاً بكم في شبكة ون بيس! نسعد بانضمامكم ونتمنى لكم تجربة ممتعة ومستقرة. نوفر سرعات متنوعة وثابتة، مع حماية قوية لحساباتكم. يُرجى الاحتفاظ بكرت الشحن حتى انتهاء الرصيد، إذ لا يمكن استرجاع الرمز في حال فقده. ولأي خلل فني، لا تترددوا في التواصل معنا. دمتم بخير!</span>
             <span>أهلاً بكم في شبكة ون بيس! نسعد بانضمامكم ونتمنى لكم تجربة ممتعة ومستقرة. نوفر سرعات متنوعة وثابتة، مع حماية قوية لحساباتكم. يُرجى الاحتفاظ بكرت الشحن حتى انتهاء الرصيد، إذ لا يمكن استرجاع الرمز في حال فقده. ولأي خلل فني، لا تترددوا في التواصل معنا. دمتم بخير!</span>
           </div>
         </div>
-
 
         <h2>تسجيل الدخول للشبكة</h2>
 
@@ -410,34 +277,43 @@
           <input id="cardInput" class="input" type="text" inputmode="numeric" placeholder="أدخل رقم الكرت هنا">
         </div>
         
-        <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة المناسبة لك</p>
+        <p style="margin-bottom: 8px; font-size: 16px; color: var(--muted);">اختر السرعة والإعدادات</p>
+        
+        <!-- ✅ START: الهيكل الجديد للقائمة المنسدلة المدمجة -->
         <div class="input-wrapper">
-          <select id="speedSelect" class="input">
-            <option value="1">سرعه واحد ميجا</option><option value="2">سرعه 2 ميجا</option><option value="4">سرعه 4 ميجا</option><option value="high">سرعه عاليه جدا</option>
-          </select>
+            <div id="customSelect" class="custom-select">
+                <div class="custom-select-trigger" data-selected-value="1">
+                    <span>سرعه واحد ميجا</span>
+                    <div class="arrow"></div>
+                </div>
+                <div class="custom-options">
+                    <div class="custom-option" data-value="1">سرعه واحد ميجا</div>
+                    <div class="custom-option" data-value="2">سرعه 2 ميجا</div>
+                    <div class="custom-option" data-value="4">سرعه 4 ميجا</div>
+                    <div class="custom-option" data-value="high">سرعه عاليه جدا</div>
+                    <div class="custom-option-divider"></div>
+                    <div class="switch-container-custom">
+                      <p>ايقاف التحديثات</p>
+                      <label class="switch">
+                        <input type="checkbox" id="updatesSwitch" checked>
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="switch-container">
-          <p>ايقاف التحديثات</p>
-          <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
-        </div>
+        <!-- ✅ END: الهيكل الجديد للقائمة المنسدلة المدمجة -->
+
         <button id="loginBtn" class="btn">تسجيل الدخول</button>
 
         <a href="https://www.tvquran.com/" target="_blank" rel="noopener noreferrer" class="ghost" style="width:100%; margin-bottom: 20px; background-color: rgba(111, 222, 175, 0.1); border-color: rgba(111, 222, 175, 0.4);">
-            <svg id="fi_18365387" enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icon">
-                <path clip-rule="evenodd" d="m97.4989471 31.3489647v46.1655388c-5.6463928-1.3915939-11.4440231-2.0746307-17.2588654-2.0322723-11.6449661 0-22.1310616 2.5542679-28.2174454 6.630806v-5.2891693c2.305748-4.0040207 10.3509064-8.0397491 21.3497238-8.0397491 4.8478317-.0566635 9.6602631.8227158 14.1750488 2.5906219.1526108.0679932.3127747.1186142.477478.1518555.595314.1208725 1.214798-.0015106 1.7202148-.3392105.2749939-.1820755.5069275-.4223175.6776657-.7048569.1382523-.2266541.2364731-.4751892.2908554-.7350845.0339966-.1669617.0491104-.3376999.0453339-.5084381v-39.3229543c2.2748032.3339291 4.5267792.812891 6.7410431 1.4331532zm-70.8704662 37.4343758v.0007553c-4.8478298-.0566559-9.6610432.8242264-14.1758327 2.5919876-.1541172.0687485-.3150349.1201172-.4804907.1526031-1.2336969.2470398-2.434165-.5499954-2.6857805-1.7821655-.0332413-.1662066-.0483513-.3354416-.0453291-.5054245v-39.3248844c-2.2755752.3346825-4.526782.8144016-6.7410483 1.4361668v46.1635971c5.6471648-1.3930969 11.44557-2.0759811 17.2611847-2.0338211 11.3192749 0 21.5508614 2.4123154 27.6991272 6.2908096v-5.7469559c-3.1971394-4.3016586-11.5209957-7.2442856-20.8313995-7.2442856zm0-50.8922959v.0007553c-4.3583298-.0339966-8.692482.6648216-12.8196945 2.067667v46.0843124c4.1597023-1.2389755 8.4803181-1.8531876 12.8196945-1.8237305 8.3277264 0 15.9013729 2.1365204 20.8313999 5.6253128l.0007553-1.3636475c.0007553-.1684723.0211525-.3361969.0596809-.5001221v-42.7655199c-3.1555595-4.3523331-11.5248604-7.3282185-20.8913517-7.3282185zm59.5680142 48.1537171v-46.0881749c-4.1264343-1.4029236-8.4605865-2.1024818-12.8196945-2.0684414-9.7962303 0-18.5024414 3.2538052-21.2897568 7.9326019v44.3552933c4.9099083-3.686058 12.7019119-5.9577637 21.2897644-5.9577637 4.3395691-.0279541 8.6592178.5870132 12.818924 1.8244781z" fill-rule="evenodd"></path>
-            </svg>
+            <svg id="fi_18365387" enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icon"><path clip-rule="evenodd" d="m97.4989471 31.3489647v46.1655388c-5.6463928-1.3915939-11.4440231-2.0746307-17.2588654-2.0322723-11.6449661 0-22.1310616 2.5542679-28.2174454 6.630806v-5.2891693c2.305748-4.0040207 10.3509064-8.0397491 21.3497238-8.0397491 4.8478317-.0566635 9.6602631.8227158 14.1750488 2.5906219.1526108.0679932.3127747.1186142.477478.1518555.595314.1208725 1.214798-.0015106 1.7202148-.3392105.2749939-.1820755.5069275-.4223175.6776657-.7048569.1382523-.2266541.2364731-.4751892.2908554-.7350845.0339966-.1669617.0491104-.3376999.0453339-.5084381v-39.3229543c2.2748032.3339291 4.5267792.812891 6.7410431 1.4331532zm-70.8704662 37.4343758v.0007553c-4.8478298-.0566559-9.6610432.8242264-14.1758327 2.5919876-.1541172.0687485-.3150349.1201172-.4804907.1526031-1.2336969.2470398-2.434165-.5499954-2.6857805-1.7821655-.0332413-.1662066-.0483513-.3354416-.0453291-.5054245v-39.3248844c-2.2755752.3346825-4.526782.8144016-6.7410483 1.4361668v46.1635971c5.6471648-1.3930969 11.44557-2.0759811 17.2611847-2.0338211 11.3192749 0 21.5508614 2.4123154 27.6991272 6.2908096v-5.7469559c-3.1971394-4.3016586-11.5209957-7.2442856-20.8313995-7.2442856zm0-50.8922959v.0007553c-4.3583298-.0339966-8.692482.6648216-12.8196945 2.067667v46.0843124c4.1597023-1.2389755 8.4803181-1.8531876 12.8196945-1.8237305 8.3277264 0 15.9013729 2.1365204 20.8313999 5.6253128l.0007553-1.3636475c.0007553-.1684723.0211525-.3361969.0596809-.5001221v-42.7655199c-3.1555595-4.3523331-11.5248604-7.3282185-20.8913517-7.3282185zm59.5680142 48.1537171v-46.0881749c-4.1264343-1.4029236-8.4605865-2.1024818-12.8196945-2.0684414-9.7962303 0-18.5024414 3.2538052-21.2897568 7.9326019v44.3552933c4.9099083-3.686058 12.7019119-5.9577637 21.2897644-5.9577637 4.3395691-.0279541 8.6592178.5870132 12.818924 1.8244781z" fill-rule="evenodd"></path></svg>
             انقر هنا لفتح موقع القرآن الكريم مجانًا
         </a>
 
         <div class="actions">
           <button id="pricesBtn" class="ghost">
-            <svg height="512" viewBox="0 0 32 32" width="512" xmlns="http://www.w3.org/2000/svg" class="icon">
-              <g id="Layer_2" data-name="Layer 2">
-                <circle cx="19" cy="20" r="1"></circle>
-                <circle cx="13" cy="12" r="1"></circle>
-                <path d="m28.724 13.11-1.147-1.147a1.994 1.994 0 0 1 -.588-1.419v-1.621a4.019 4.019 0 0 0 -4.014-4.015h-1.622a1.99 1.99 0 0 1 -1.419-.588l-1.147-1.146a4.019 4.019 0 0 0 -5.677 0l-1.147 1.146a1.99 1.99 0 0 1 -1.419.588h-1.621a4.019 4.019 0 0 0 -4.015 4.015v1.621a1.994 1.994 0 0 1 -.588 1.42l-1.146 1.146a4.019 4.019 0 0 0 0 5.677l1.146 1.148a1.986 1.986 0 0 1 .588 1.418v1.622a4.019 4.019 0 0 0 4.015 4.014h1.621a2 2 0 0 1 1.42.588l1.146 1.147a4.018 4.018 0 0 0 5.677 0l1.148-1.147a1.99 1.99 0 0 1 1.418-.588h1.622a4.019 4.019 0 0 0 4.014-4.014v-1.622a1.99 1.99 0 0 1 .588-1.418l1.147-1.147a4.019 4.019 0 0 0 0-5.678zm-18.724-1.11a3 3 0 1 1 3 3 3 3 0 0 1 -3-3zm2.957 8.457a1 1 0 0 1 -1.414-1.414l7.5-7.5a1 1 0 0 1 1.414 1.414zm6.043 2.543a3 3 0 1 1 3-3 3 3 0 0 1 -3 3z"></path>
-              </g>
-            </svg>
+            <svg height="512" viewBox="0 0 32 32" width="512" xmlns="http://www.w3.org/2000/svg" class="icon"><g id="Layer_2" data-name="Layer 2"><circle cx="19" cy="20" r="1"></circle><circle cx="13" cy="12" r="1"></circle><path d="m28.724 13.11-1.147-1.147a1.994 1.994 0 0 1 -.588-1.419v-1.621a4.019 4.019 0 0 0 -4.014-4.015h-1.622a1.99 1.99 0 0 1 -1.419-.588l-1.147-1.146a4.019 4.019 0 0 0 -5.677 0l-1.147 1.146a1.99 1.99 0 0 1 -1.419.588h-1.621a4.019 4.019 0 0 0 -4.015 4.015v1.621a1.994 1.994 0 0 1 -.588 1.42l-1.146 1.146a4.019 4.019 0 0 0 0 5.677l1.146 1.148a1.986 1.986 0 0 1 .588 1.418v1.622a4.019 4.019 0 0 0 4.015 4.014h1.621a2 2 0 0 1 1.42.588l1.146 1.147a4.018 4.018 0 0 0 5.677 0l1.148-1.147a1.99 1.99 0 0 1 1.418-.588h1.622a4.019 4.019 0 0 0 4.014-4.014v-1.622a1.99 1.99 0 0 1 .588-1.418l1.147-1.147a4.019 4.019 0 0 0 0-5.678zm-18.724-1.11a3 3 0 1 1 3 3 3 3 0 0 1 -3-3zm2.957 8.457a1 1 0 0 1 -1.414-1.414l7.5-7.5a1 1 0 0 1 1.414 1.414zm6.043 2.543a3 3 0 1 1 3-3 3 3 0 0 1 -3 3z"></path></g></svg>
             الأسعار
           </button>
           <button id="storesBtn" class="ghost">
@@ -521,6 +397,13 @@
 
     loginBtn.addEventListener('click', () => {
       const cardNumber = cardInput.value.trim();
+      const selectedSpeed = document.querySelector('.custom-select-trigger').dataset.selectedValue;
+      const stopUpdates = document.getElementById('updatesSwitch').checked;
+
+      // يمكنك الآن استخدام قيم selectedSpeed و stopUpdates عند تسجيل الدخول
+      console.log("السرعة المختارة:", selectedSpeed);
+      console.log("إيقاف التحديثات:", stopUpdates);
+
       if (cardNumber === '') return showToast("الرجاء إدخال رقم الكرت");
       const user = dummyUsers[cardNumber];
       if (user) {
@@ -549,6 +432,37 @@
       document.getElementById('storesList').innerHTML = stores.map(s => `<div class="item"><div>${s.branch}</div><div>${s.hours}</div></div>`).join('');
     }
     populateInfoLists();
+
+    // --- ✅ START: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
+    const customSelect = document.getElementById('customSelect');
+    const selectTrigger = customSelect.querySelector('.custom-select-trigger');
+    const options = customSelect.querySelectorAll('.custom-option');
+    
+    selectTrigger.addEventListener('click', () => {
+      customSelect.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        selectTrigger.querySelector('span').textContent = option.textContent;
+        selectTrigger.dataset.selectedValue = option.dataset.value;
+        customSelect.classList.remove('open');
+      });
+    });
+
+    // إيقاف إغلاق القائمة عند النقر على حاوية "إيقاف التحديثات"
+    document.querySelector('.switch-container-custom').addEventListener('click', e => {
+        e.stopPropagation();
+    });
+    
+    // إغلاق القائمة عند النقر في أي مكان آخر في الصفحة
+    window.addEventListener('click', e => {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+      }
+    });
+    // --- ✅ END: السكريبت الخاص بالقائمة المنسدلة المخصصة ---
+
   </script>
 
 </body>
