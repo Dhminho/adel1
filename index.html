@@ -19,6 +19,7 @@
       --muted:#9aa7bd;
       --glass-border: rgba(255,255,255,0.06);
       --neon: #6be0ff;
+      --success: #70e0a3;
       --radius: 16px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
@@ -234,7 +235,7 @@
       .title h1 { font-size: 28px; }
       .actions { flex-direction: row; gap: 10px; margin-bottom: 15px; }
       .card-header { margin-bottom: 20px; }
-      .news-ticker-container { margin-bottom: 20px; } /* ✅ تم إزالة الـ padding من هنا */
+      .news-ticker-container { margin-bottom: 20px; }
       .news-ticker-content span { font-size: 13px; }
       h2 { font-size: 1.2rem; margin: 20px 0 15px 0; }
       .input-wrapper { margin-bottom: 15px; }
@@ -244,6 +245,89 @@
       a.ghost { margin-bottom: 15px; }
     }
     /* --- END: التعديلات الخاصة بتنظيم الصفحة على الجوال --- */
+
+    /* START: الأنماط المحسّنة للنافذة المنبثقة */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .popup-overlay.show {
+        display: flex;
+        opacity: 1;
+    }
+    .popup-content {
+        background: var(--card);
+        padding: 40px;
+        border-radius: var(--radius);
+        text-align: center;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 10px 50px rgba(0,0,0,0.6);
+        max-width: 520px;
+        width: 90%;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .popup-overlay.show .popup-content {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .popup-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+    }
+    .popup-icon .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 3;
+        stroke-miterlimit: 10;
+        stroke: var(--success);
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .popup-icon .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke: var(--success);
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+    .popup-overlay.show .popup-icon .checkmark__circle { animation-delay: 0.1s; }
+    .popup-overlay.show .popup-icon .checkmark__check { animation-delay: 0.7s; }
+
+    @keyframes stroke {
+        100% { stroke-dashoffset: 0; }
+    }
+
+    .popup-content h2 {
+        font-size: 28px;
+        color: var(--text);
+        margin-bottom: 12px;
+        font-weight: 800;
+    }
+    .popup-content p {
+        font-size: 18px;
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+    }
+    /* END: الأنماط المحسّنة للنافذة المنبثقة */
+
   </style>
 </head>
 <body>
@@ -363,12 +447,32 @@
   
   <div id="toast" class="toast"></div>
 
+  <!-- START: الكود المحسّن للنافذة المنبثقة -->
+  <div id="successPopup" class="popup-overlay">
+      <div class="popup-content">
+          <div class="popup-icon">
+              <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                  <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                  <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+          </div>
+          <h2>تم تسجيل الدخول بنجاح</h2>
+          <p>
+              تذكّر دائمًا أن الله يراك ويراقبك في كل لحظة
+              <br>
+              فاستخدم الشبكة فيما يرضيه
+          </p>
+      </div>
+  </div>
+  <!-- END: الكود المحسّن للنافذة المنبثقة -->
+
   <script>
     const dummyUsers = { "1111111111": { cardNumber: "1111111111", validity: "يومان و 5 ساعات", usage: { isUnlimited: false, totalGB: 12, usedGB: 4.5 } }, "2222222222": { cardNumber: "2222222222", validity: "28 يوماً", usage: { isUnlimited: true } } };
     const prices = [ {value:"ابو 100 ريال", size:"400 ميجا"}, {value:"ابو 200 ريال", size:"800 ميجا"}, {value:"ابو 300 ريال", size:"1024 ميجا"}, {value:"ابو 500 ريال", size:"2 جيجا"}, {value:"ابو 1000 ريال", size:"4 جيجا"}, {value:"ابو 1500 ريال", size:"6 جيجا"}, {value:"ابو 3000 ريال", size:"12 جيجا"}, {value:"ابو 3500 ريال", size:"14 جيجا"} ];
     const stores = [ {branch:"البقالات المجاوره للشبكه", hours:"خدمة على مدار الساعة"} ];
     
-    const cardInput = document.getElementById('cardInput'), loginBtn = document.getElementById('loginBtn'), logoutBtn = document.getElementById('logoutBtn'), pricesBtn = document.getElementById('pricesBtn'), storesBtn = document.getElementById('storesBtn'), backBtns = document.querySelectorAll('.back-btn'), copySupport = document.getElementById('copySupport'), toast = document.getElementById('toast'), usernameDisplay = document.getElementById('usernameDisplay'), limitedView = document.getElementById('limited-account-view'), unlimitedView = document.getElementById('unlimited-account-view'), validityDisplay = document.getElementById('validityDisplay');
+    const cardInput = document.getElementById('cardInput'), loginBtn = document.getElementById('loginBtn'), logoutBtn = document.getElementById('logoutBtn'), pricesBtn = document.getElementById('pricesBtn'), storesBtn = document.getElementById('storesBtn'), backBtns = document.querySelectorAll('.back-btn'), copySupport = document.getElementById('copySupport'), toast = document.getElementById('toast'), usernameDisplay = document.getElementById('usernameDisplay'), limitedView = document.getElementById('limited-account-view'), unlimitedView = document.getElementById('unlimited-account-view'), validityDisplay = document.getElementById('validityDisplay'),
+    successPopup = document.getElementById('successPopup');
 
     function switchView(viewId) {
       const currentView = document.querySelector('.view-container.view-active');
@@ -413,8 +517,21 @@
       if (cardNumber === '') return showToast("الرجاء إدخال رقم الكرت");
       const user = dummyUsers[cardNumber];
       if (user) {
-        populateDashboard(user);
-        switchView('dashboard-view');
+        // 1. إظهار النافذة المنبثقة
+        successPopup.classList.add('show');
+
+        // 2. الانتظار لمدة 3 ثوانٍ
+        setTimeout(() => {
+          // 3. إخفاء النافذة المنبثقة
+          successPopup.classList.remove('show');
+          
+          // 4. تنفيذ الكود الأصلي بعد نصف ثانية إضافية لإعطاء وقت لتأثير الخروج
+          setTimeout(() => {
+            populateDashboard(user);
+            switchView('dashboard-view');
+          }, 300);
+
+        }, 3000); // 3000 ميلي ثانية = 3 ثوانٍ
       } else {
         showToast("رقم الكرت غير صحيح");
       }
